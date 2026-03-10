@@ -5,288 +5,292 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AZM AR Experience</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
   *{margin:0;padding:0;box-sizing:border-box;}
-  :root{--blue:#1f2adf;--cyan:#00b7ff;--green:#89d957;--dark:#04060f;--mono:'Share Tech Mono',monospace;}
-  body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow:hidden;height:100vh;width:100vw;}
+  :root{--blue:#1f2adf;--cyan:#00b7ff;--green:#89d957;--dark:#04060f;}
+  body{background:var(--dark);color:#fff;font-family:'Share Tech Mono',monospace;overflow:hidden;height:100vh;width:100vw;}
+  #landing{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;}
   .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,183,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,183,255,.06) 1px,transparent 1px);background-size:44px 44px;animation:gridMove 10s linear infinite;pointer-events:none;}
   @keyframes gridMove{from{background-position:0 0}to{background-position:44px 44px}}
-  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.25;animation:orbPulse 5s ease-in-out infinite alternate;}
-  .orb1{width:420px;height:420px;background:var(--blue);top:-120px;left:-120px;}
-  .orb2{width:300px;height:300px;background:var(--cyan);bottom:-80px;right:-80px;animation-delay:2s;}
-  .orb3{width:200px;height:200px;background:var(--green);top:40%;left:40%;animation-delay:1s;opacity:.12;}
-  @keyframes orbPulse{from{transform:scale(1);opacity:.2}to{transform:scale(1.25);opacity:.35}}
-  #landing{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;}
-  .azm-badge{font-family:var(--mono);font-size:11px;letter-spacing:6px;color:var(--cyan);border:1px solid rgba(0,183,255,.3);padding:5px 18px;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);background:rgba(0,183,255,.07);opacity:0;animation:fadeUp .7s ease .2s forwards;}
-  .logo-wrap{position:relative;text-align:center;z-index:2;margin-top:18px;opacity:0;animation:fadeUp .7s ease .4s forwards;}
-  .logo-azm{font-family:'Bebas Neue',sans-serif;font-size:clamp(90px,22vw,180px);line-height:.88;letter-spacing:6px;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 40px rgba(0,183,255,.4));}
-  .logo-sub{font-family:var(--mono);font-size:13px;letter-spacing:5px;color:rgba(255,255,255,.35);margin-top:4px;}
-  .logo-ar-tag{position:absolute;top:8px;right:-36px;font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:2px;border:1px solid var(--green);padding:2px 7px;animation:blink 1.8s ease-in-out infinite;}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;}
+  .orb1{width:400px;height:400px;background:var(--blue);top:-100px;left:-100px;opacity:.3;animation:op 5s ease-in-out infinite alternate;}
+  .orb2{width:280px;height:280px;background:var(--cyan);bottom:-80px;right:-80px;opacity:.2;animation:op 5s ease-in-out infinite alternate;animation-delay:2s;}
+  @keyframes op{from{opacity:.15}to{opacity:.35}}
+  .logo-wrap{position:relative;text-align:center;opacity:0;animation:fadeUp .7s ease .3s forwards;}
+  .logo-azm{font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,24vw,190px);line-height:.88;letter-spacing:6px;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 40px rgba(0,183,255,.4));}
+  .logo-sub{font-size:12px;letter-spacing:5px;color:rgba(255,255,255,.3);margin-top:4px;}
+  .logo-ar-tag{position:absolute;top:10px;right:-38px;font-size:10px;color:var(--green);letter-spacing:2px;border:1px solid var(--green);padding:2px 7px;animation:blink 1.8s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-  .tagline{font-size:14px;letter-spacing:3px;font-weight:500;color:rgba(255,255,255,.45);margin-top:12px;opacity:0;animation:fadeUp .7s ease .6s forwards;}
-  .start-btn{margin-top:40px;padding:18px 56px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:var(--mono);font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s ease;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);opacity:0;animation:fadeUp .7s ease .8s forwards;}
+  .tagline{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.4);margin-top:14px;opacity:0;animation:fadeUp .7s ease .5s forwards;}
+  .btn-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:44px;opacity:0;animation:fadeUp .7s ease .7s forwards;}
+  .start-btn{padding:18px 60px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);}
   .start-btn:hover{background:var(--cyan);color:var(--dark);box-shadow:0 0 40px var(--cyan);}
-  .disclaimer{position:absolute;bottom:22px;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.18);letter-spacing:1px;text-align:center;opacity:0;animation:fadeUp .7s ease 1s forwards;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  #loadingScreen{position:fixed;inset:0;background:var(--dark);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
-  .loader-ring{width:56px;height:56px;border:2px solid rgba(0,183,255,.12);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .loader-text{font-family:var(--mono);font-size:11px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;}
-  #ar-screen{position:fixed;inset:0;display:none;}
-  #videoEl{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-  #threeCanvas{position:absolute;inset:0;width:100%;height:100%;}
-  .hud{position:absolute;inset:0;pointer-events:none;z-index:10;}
-  .hud-corner{position:absolute;width:26px;height:26px;border-color:var(--cyan);border-style:solid;opacity:.55;}
-  .hud-corner.tl{top:18px;left:18px;border-width:2px 0 0 2px;}.hud-corner.tr{top:18px;right:18px;border-width:2px 2px 0 0;}.hud-corner.bl{bottom:18px;left:18px;border-width:0 0 2px 2px;}.hud-corner.br{bottom:18px;right:18px;border-width:0 2px 2px 0;}
-  .hud-top{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;}
-  .hud-brand{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:5px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .hud-status-bar{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;background:rgba(0,183,255,.07);border:1px solid rgba(0,183,255,.2);padding:5px 18px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
-  .scanning-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 3s linear infinite;opacity:.35;pointer-events:none;}
-  @keyframes scan{0%{top:0%;opacity:0}5%{opacity:.35}95%{opacity:.35}100%{top:100%;opacity:0}}
-  .tap-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:13px;letter-spacing:3px;color:rgba(255,255,255,.5);text-transform:uppercase;pointer-events:none;text-align:center;}
-  .tap-hint span{display:block;font-size:40px;margin-bottom:10px;animation:float 2s ease-in-out infinite;}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .hud-bottom{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;pointer-events:all;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 40px);}
-  .ctrl-btn{padding:10px 18px;background:rgba(0,0,0,.55);border:1px solid rgba(0,183,255,.3);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:10px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-transform:uppercase;backdrop-filter:blur(10px);white-space:nowrap;}
-  .ctrl-btn.active,.ctrl-btn:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,183,255,.1);box-shadow:0 0 14px rgba(0,183,255,.2);}
-  .clear-btn{padding:10px 18px;background:rgba(0,0,0,.55);border:1px solid rgba(255,80,80,.3);color:rgba(255,100,100,.7);font-family:var(--mono);font-size:10px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-transform:uppercase;backdrop-filter:blur(10px);}
-  .clear-btn:hover{border-color:#ff5050;color:#ff5050;background:rgba(255,80,80,.1);}
-  .divider{width:1px;height:32px;background:rgba(0,183,255,.2);}
-  .back-btn{position:absolute;top:18px;left:18px;z-index:20;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:8px 14px;cursor:pointer;pointer-events:all;backdrop-filter:blur(10px);transition:all .2s;}
+  .ios-btn{padding:18px 60px;background:transparent;border:2px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);text-decoration:none;display:inline-block;text-align:center;}
+  .ios-btn:hover{background:var(--green);color:var(--dark);box-shadow:0 0 40px var(--green);}
+  .device-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.2);}
+  .disclaimer{position:absolute;bottom:24px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;text-align:center;opacity:0;animation:fadeUp .7s ease .9s forwards;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  /* NOT SUPPORTED */
+  #notSupported{position:fixed;inset:0;background:var(--dark);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center;}
+  #notSupported h2{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--cyan);}
+  #notSupported p{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1px;line-height:1.8;max-width:320px;}
+
+  /* AR OVERLAY */
+  #arOverlay{position:fixed;inset:0;display:none;z-index:50;pointer-events:none;}
+  #arOverlay .interactive{pointer-events:all;}
+  .hud-corner{position:absolute;width:26px;height:26px;border-color:var(--cyan);border-style:solid;opacity:.5;}
+  .hud-corner.tl{top:18px;left:18px;border-width:2px 0 0 2px;}
+  .hud-corner.tr{top:18px;right:18px;border-width:2px 2px 0 0;}
+  .hud-corner.bl{bottom:18px;left:18px;border-width:0 0 2px 2px;}
+  .hud-corner.br{bottom:18px;right:18px;border-width:0 2px 2px 0;}
+  .hud-top{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;}
+  .hud-brand{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:6px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .hud-status{font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,183,255,.07);border:1px solid rgba(0,183,255,.2);padding:5px 16px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);text-transform:uppercase;}
+  .scanning-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 3s linear infinite;opacity:.3;}
+  @keyframes scan{0%{top:0%;opacity:0}5%{opacity:.3}95%{opacity:.3}100%{top:100%;opacity:0}}
+  .reticle-hint{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.45);text-transform:uppercase;text-align:center;white-space:nowrap;}
+  .place-wrap{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .place-btn{padding:18px 64px;background:var(--cyan);color:var(--dark);font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:5px;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);transition:all .2s;box-shadow:0 0 30px rgba(0,183,255,.4);}
+  .place-btn:hover{background:#fff;box-shadow:0 0 50px rgba(0,183,255,.7);}
+  .place-btn:active{transform:scale(.96);}
+  .place-btn:disabled{background:rgba(0,183,255,.15);color:rgba(255,255,255,.25);box-shadow:none;cursor:not-allowed;}
+  .back-btn{position:absolute;top:18px;left:18px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s;}
   .back-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-  .place-dot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green);pointer-events:none;transform:translate(-50%,-50%);animation:dotPop .4s ease forwards;}
-  @keyframes dotPop{0%{transform:translate(-50%,-50%) scale(0);opacity:1}100%{transform:translate(-50%,-50%) scale(2.5);opacity:0}}
+  .placed-badge{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.4);}
 </style>
 </head>
 <body>
 
+<!-- LANDING -->
 <div id="landing">
   <div class="grid-bg"></div>
-  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
-  <div class="azm-badge">✦ AZM Experience ✦</div>
+  <div class="orb orb1"></div><div class="orb orb2"></div>
   <div class="logo-wrap">
     <div class="logo-azm">AZM</div>
     <div class="logo-ar-tag">AR</div>
     <div class="logo-sub">AUGMENTED REALITY</div>
   </div>
-  <div class="tagline">tap anywhere to place</div>
-  <button class="start-btn" id="startBtn">Launch AR</button>
-  <div class="disclaimer">requires camera permission · best in good lighting</div>
-</div>
-
-<div id="loadingScreen">
-  <div class="loader-ring"></div>
-  <div class="loader-text" id="loadingText">Initializing AZM AR...</div>
-</div>
-
-<div id="ar-screen">
-  <video id="videoEl" playsinline autoplay muted></video>
-  <canvas id="threeCanvas"></canvas>
-  <div class="scanning-line"></div>
-  <div class="tap-hint" id="tapHint"><span>👆</span>TAP TO PLACE</div>
-  <div class="hud">
-    <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
-    <div class="hud-corner bl"></div><div class="hud-corner br"></div>
-    <div class="hud-top">
-      <div class="hud-brand">AZM</div>
-      <div class="hud-status-bar" id="statusText">Tap to place object</div>
-    </div>
+  <div class="tagline">point at a surface · press place</div>
+  <div class="btn-row" id="btnRow">
+    <!-- Buttons injected by JS based on device -->
   </div>
-  <button class="back-btn" id="backBtn">← BACK</button>
-  <div class="hud-bottom">
-    <button class="ctrl-btn active" id="btn0">YOUR MODEL</button>
-    <button class="ctrl-btn" id="btn1">GEM</button>
-    <button class="ctrl-btn" id="btn2">ROBOT</button>
-    <button class="ctrl-btn" id="btn3">PORTAL</button>
-    <div class="divider"></div>
-    <button class="clear-btn" id="clearBtn">✕ CLEAR</button>
+  <div class="disclaimer">Android: Chrome · iOS: Safari 16+</div>
+</div>
+
+<!-- NOT SUPPORTED -->
+<div id="notSupported">
+  <h2>Not Supported</h2>
+  <p>Please use Chrome on Android or Safari on iOS 16+.</p>
+  <button class="start-btn" style="margin-top:24px;" id="nsBackBtn">Go Back</button>
+</div>
+
+<!-- AR OVERLAY (Android WebXR) -->
+<div id="arOverlay">
+  <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+  <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+  <div class="scanning-line"></div>
+  <div class="hud-top">
+    <div class="hud-brand">AZM</div>
+    <div class="hud-status" id="statusText">Move camera to detect surface</div>
+  </div>
+  <div class="reticle-hint" id="reticleHint">Searching for surface...</div>
+  <button class="back-btn interactive" id="backBtn">← BACK</button>
+  <div class="place-wrap interactive">
+    <div class="placed-badge" id="placedBadge"></div>
+    <button class="place-btn" id="placeBtn" disabled>PLACE</button>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
 <script>
-let scene, camera3d, renderer, embeddedModel = null;
-let currentModelType = 0;
-let placedObjects = [];
-let clock, animFrameId;
+var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var isAndroid = /Android/.test(navigator.userAgent);
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('startBtn').addEventListener('click', startAR);
-  document.getElementById('backBtn').addEventListener('click', goBack);
-  document.getElementById('clearBtn').addEventListener('click', clearPlaced);
-  document.getElementById('btn0').addEventListener('click', function(){ setModel(0); });
-  document.getElementById('btn1').addEventListener('click', function(){ setModel(1); });
-  document.getElementById('btn2').addEventListener('click', function(){ setModel(2); });
-  document.getElementById('btn3').addEventListener('click', function(){ setModel(3); });
-});
-
-function startAR() {
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('loadingScreen').style.display = 'flex';
-  initThree();
-  startCamera();
+// Build landing buttons based on device
+var btnRow = document.getElementById('btnRow');
+if (isIOS) {
+  // iOS: AR Quick Look via <a rel="ar">
+  btnRow.innerHTML =
+    '<span class="device-label">iOS · Safari AR</span>' +
+    '<a class="ios-btn" id="iosArBtn" href="base_basic_shaded.usdz" rel="ar">' +
+    '  Launch AR' +
+    '</a>';
+} else {
+  // Android / other: WebXR
+  btnRow.innerHTML =
+    '<span class="device-label">' + (isAndroid ? 'Android · Chrome AR' : 'WebXR AR') + '</span>' +
+    '<button class="start-btn" id="startBtn">Launch AR</button>';
+  document.addEventListener('DOMContentLoaded', function() {
+    var sb = document.getElementById('startBtn');
+    if (sb) sb.addEventListener('click', startAR);
+  });
 }
 
-function goBack() {
-  if (animFrameId) cancelAnimationFrame(animFrameId);
-  document.getElementById('ar-screen').style.display = 'none';
+// Also wire up immediately in case DOM is ready
+window.addEventListener('load', function() {
+  var sb = document.getElementById('startBtn');
+  if (sb) sb.addEventListener('click', startAR);
+});
+
+document.getElementById('nsBackBtn').addEventListener('click', function() {
+  document.getElementById('notSupported').style.display = 'none';
   document.getElementById('landing').style.display = 'flex';
-  const v = document.getElementById('videoEl');
-  if (v.srcObject) { v.srcObject.getTracks().forEach(t => t.stop()); v.srcObject = null; }
-  placedObjects = [];
-  if (renderer) { renderer.dispose(); renderer = null; }
+});
+document.getElementById('backBtn').addEventListener('click', endAR);
+document.getElementById('placeBtn').addEventListener('click', placeModel);
+
+/* ── WebXR (Android) ── */
+var renderer, scene, camera3d, reticle;
+var hitTestSource = null, hitTestSourceRequested = false;
+var loadedModel = null, placedCount = 0, xrSession = null;
+var clock, placedObjects = [], surfaceFound = false;
+
+// Pre-load GLB for Android
+if (!isIOS) {
+  var loader = new THREE.GLTFLoader();
+  loader.load('base_basic_shaded.glb', function(gltf) {
+    loadedModel = gltf.scene;
+    var box = new THREE.Box3().setFromObject(loadedModel);
+    var size = new THREE.Vector3(); box.getSize(size);
+    var maxDim = Math.max(size.x, size.y, size.z);
+    if (maxDim > 0) loadedModel.scale.setScalar(1.2 / maxDim);
+  }, undefined, function(err) { console.error('GLB error:', err); });
+}
+
+function startAR() {
+  if (!navigator.xr) { showNotSupported(); return; }
+  navigator.xr.isSessionSupported('immersive-ar').then(function(supported) {
+    if (!supported) { showNotSupported(); return; }
+    document.getElementById('landing').style.display = 'none';
+    launchXR();
+  }).catch(function() { showNotSupported(); });
+}
+
+function launchXR() {
+  clock = new THREE.Clock();
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.xr.enabled = true;
+  renderer.domElement.style.cssText = 'position:fixed;inset:0;z-index:40;';
+  document.body.appendChild(renderer.domElement);
+
+  scene = new THREE.Scene();
+  camera3d = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 1.4));
+  var d1 = new THREE.DirectionalLight(0x00b7ff, 1.5); d1.position.set(1,3,2); scene.add(d1);
+  var d2 = new THREE.DirectionalLight(0x89d957, 0.8); d2.position.set(-2,1,-1); scene.add(d2);
+
+  var rGeo = new THREE.RingGeometry(0.08, 0.13, 32);
+  rGeo.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+  reticle = new THREE.Mesh(rGeo, new THREE.MeshBasicMaterial({ color:0x00b7ff, transparent:true, opacity:0.9, side:THREE.DoubleSide }));
+  reticle.matrixAutoUpdate = false;
+  reticle.visible = false;
+  scene.add(reticle);
+
+  var dGeo = new THREE.CircleGeometry(0.04, 32);
+  dGeo.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+  reticle.add(new THREE.Mesh(dGeo, new THREE.MeshBasicMaterial({ color:0x89d957, transparent:true, opacity:0.7, side:THREE.DoubleSide })));
+
+  navigator.xr.requestSession('immersive-ar', {
+    requiredFeatures: ['hit-testing'],
+    optionalFeatures: ['dom-overlay'],
+    domOverlay: { root: document.getElementById('arOverlay') }
+  }).then(function(session) {
+    xrSession = session;
+    renderer.xr.setReferenceSpaceType('local');
+    renderer.xr.setSession(session).then(function() {
+      document.getElementById('arOverlay').style.display = 'block';
+      setStatus('Move camera to detect surface');
+      renderer.setAnimationLoop(onXRFrame);
+    });
+    session.addEventListener('end', function() {
+      document.getElementById('arOverlay').style.display = 'none';
+      if (renderer && renderer.domElement) renderer.domElement.remove();
+      renderer.setAnimationLoop(null);
+    });
+  }).catch(function(err) {
+    console.error('XR error:', err);
+    showNotSupported();
+    if (renderer && renderer.domElement) renderer.domElement.remove();
+  });
+}
+
+function onXRFrame(timestamp, frame) {
+  if (!frame) return;
+  var t = clock.getElapsedTime();
+  placedObjects.forEach(function(obj, i) { obj.rotation.y = t * 0.6 + i * 1.2; });
+
+  var session = renderer.xr.getSession();
+  var refSpace = renderer.xr.getReferenceSpace();
+
+  if (!hitTestSourceRequested) {
+    session.requestReferenceSpace('viewer').then(function(viewerSpace) {
+      session.requestHitTestSource({ space: viewerSpace }).then(function(src) { hitTestSource = src; });
+    });
+    hitTestSourceRequested = true;
+  }
+
+  if (hitTestSource) {
+    var results = frame.getHitTestResults(hitTestSource);
+    if (results.length > 0) {
+      var pose = results[0].getPose(refSpace);
+      reticle.visible = true;
+      reticle.matrix.fromArray(pose.transform.matrix);
+      document.getElementById('placeBtn').disabled = false;
+      if (!surfaceFound) {
+        surfaceFound = true;
+        document.getElementById('reticleHint').textContent = 'Surface found — press PLACE';
+        setStatus('Surface detected ✦');
+      }
+    } else {
+      reticle.visible = false;
+      document.getElementById('placeBtn').disabled = true;
+      surfaceFound = false;
+      document.getElementById('reticleHint').textContent = 'Searching for surface...';
+      setStatus('Move camera to detect surface');
+    }
+  }
+  renderer.render(scene, camera3d);
+}
+
+function placeModel() {
+  if (!reticle.visible || !loadedModel) return;
+  var clone = loadedModel.clone();
+  var pos = new THREE.Vector3(), quat = new THREE.Quaternion(), sc = new THREE.Vector3();
+  reticle.matrix.decompose(pos, quat, sc);
+  clone.position.copy(pos);
+  clone.quaternion.copy(quat);
+  scene.add(clone);
+  placedObjects.push(clone);
+  placedCount++;
+  document.getElementById('placedBadge').textContent = placedCount + ' placed';
+  var btn = document.getElementById('placeBtn');
+  btn.textContent = 'PLACED ✦'; btn.style.background = 'var(--green)'; btn.style.color = '#000';
+  setTimeout(function() { btn.textContent = 'PLACE'; btn.style.background = ''; btn.style.color = ''; }, 700);
+}
+
+function endAR() {
+  if (xrSession) { xrSession.end().catch(function(){}); xrSession = null; }
+  hitTestSource = null; hitTestSourceRequested = false; surfaceFound = false;
+  placedObjects = []; placedCount = 0;
+  if (renderer && renderer.domElement) renderer.domElement.remove();
+  renderer = null;
+  document.getElementById('arOverlay').style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+  document.getElementById('placeBtn').disabled = true;
+  document.getElementById('placedBadge').textContent = '';
+  document.getElementById('reticleHint').textContent = 'Searching for surface...';
 }
 
 function setStatus(t) { document.getElementById('statusText').textContent = t; }
-
-function setModel(idx) {
-  currentModelType = idx;
-  [0,1,2,3].forEach(i => document.getElementById('btn'+i).classList.toggle('active', i === idx));
-}
-
-function clearPlaced() {
-  placedObjects.forEach(o => scene.remove(o));
-  placedObjects = [];
-  document.getElementById('tapHint').style.display = 'block';
-  setStatus('Tap to place object');
-}
-
-function initThree() {
-  clock = new THREE.Clock();
-  const canvas = document.getElementById('threeCanvas');
-  scene = new THREE.Scene();
-  camera3d = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 1000);
-  camera3d.position.z = 5;
-  renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-  const d1 = new THREE.DirectionalLight(0x00b7ff, 1.8); d1.position.set(1,2,3); scene.add(d1);
-  const d2 = new THREE.DirectionalLight(0x89d957, 1.0); d2.position.set(-2,-1,1); scene.add(d2);
-  const d3 = new THREE.DirectionalLight(0xffffff, 0.6); d3.position.set(0,3,-2); scene.add(d3);
-
-  // Load GLB from same folder as index.html
-  const loader = new THREE.GLTFLoader();
-  loader.load('base_basic_shaded.glb', function(gltf) {
-    embeddedModel = gltf.scene;
-    const box = new THREE.Box3().setFromObject(embeddedModel);
-    const size = new THREE.Vector3(); box.getSize(size);
-    const maxDim = Math.max(size.x, size.y, size.z);
-    if (maxDim > 0) embeddedModel.scale.setScalar(0.9 / maxDim);
-    setStatus('Tap to place object');
-  }, function(xhr) {
-    const pct = Math.round(xhr.loaded / xhr.total * 100);
-    document.getElementById('loadingText').textContent = 'Loading model... ' + pct + '%';
-  }, function(err) {
-    console.error('GLB error:', err);
-    setStatus('Using fallback model');
-  });
-
-  animateThree();
-
-  canvas.addEventListener('click', function(e) {
-    const rect = canvas.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    const ny = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    const vec = new THREE.Vector3(nx, ny, 0.5).unproject(camera3d);
-    const dir = vec.sub(camera3d.position).normalize();
-    const dist = -camera3d.position.z / dir.z;
-    const pos = camera3d.position.clone().add(dir.multiplyScalar(dist));
-    placeObjectAt(pos);
-    spawnRipple(e.clientX, e.clientY);
-  });
-
-  window.addEventListener('resize', function() {
-    camera3d.aspect = window.innerWidth / window.innerHeight;
-    camera3d.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-}
-
-function placeObjectAt(pos) {
-  const group = new THREE.Group();
-  if (currentModelType === 0 && embeddedModel) {
-    group.add(embeddedModel.clone()); group.scale.setScalar(0.6);
-  } else if (currentModelType === 1) { buildGem(group); group.scale.setScalar(0.55); }
-  else if (currentModelType === 2) { buildRobot(group); group.scale.setScalar(0.55); }
-  else if (currentModelType === 3) { buildPortal(group); group.scale.setScalar(0.55); }
-  else { buildGem(group); group.scale.setScalar(0.55); }
-  group.position.copy(pos);
-  group.userData.baseY = pos.y;
-  scene.add(group);
-  placedObjects.push(group);
-  document.getElementById('tapHint').style.display = 'none';
-  setStatus('Placed ' + placedObjects.length + ' object' + (placedObjects.length > 1 ? 's' : '') + ' ✦');
-}
-
-function spawnRipple(x, y) {
-  const d = document.createElement('div');
-  d.className = 'place-dot'; d.style.left = x + 'px'; d.style.top = y + 'px';
-  document.getElementById('ar-screen').appendChild(d);
-  setTimeout(function(){ d.remove(); }, 500);
-}
-
-function animateThree() {
-  animFrameId = requestAnimationFrame(animateThree);
-  const t = clock.getElapsedTime();
-  placedObjects.forEach(function(obj, i) {
-    obj.rotation.y = t * 0.8 + i;
-    obj.position.y = obj.userData.baseY + Math.sin(t * 1.5 + i) * 0.06;
-    for (var j=0;j<14;j++){var dot=obj.getObjectByName('dot_'+j);if(dot){var a=(j/14)*Math.PI*2+t*1.6;dot.position.set(Math.cos(a)*.68,Math.sin(a)*.68,0);}}
-    for (var j=0;j<35;j++){var star=obj.getObjectByName('star_'+j);if(star)star.material.opacity=0.2+Math.abs(Math.sin(t*2.5+j))*0.7;}
-    var ring=obj.getObjectByName('ring'); if(ring) ring.rotation.x=t*2.2;
-    var ring2=obj.getObjectByName('ring2'); if(ring2) ring2.rotation.z=-t*1.8;
-    obj.children.forEach(function(c){
-      if(c.name==='arm_l') c.rotation.x=Math.sin(t*2)*0.35;
-      if(c.name==='arm_r') c.rotation.x=Math.sin(t*2+Math.PI)*0.35;
-    });
-  });
-  if (renderer) renderer.render(scene, camera3d);
-}
-
-function startCamera() {
-  const video = document.getElementById('videoEl');
-  navigator.mediaDevices.getUserMedia({
-    video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
-    audio: false
-  }).then(function(stream) {
-    video.srcObject = stream;
-    video.onloadedmetadata = function() {
-      video.play();
-      document.getElementById('loadingScreen').style.display = 'none';
-      document.getElementById('ar-screen').style.display = 'block';
-    };
-  }).catch(function(err) {
-    document.getElementById('loadingText').textContent = 'Camera error: ' + err.message;
-  });
-}
-
-function buildGem(g) {
-  g.add(new THREE.Mesh(new THREE.OctahedronGeometry(.5,0),new THREE.MeshPhongMaterial({color:0x00b7ff,emissive:0x001833,specular:0xffffff,shininess:200,transparent:true,opacity:.85})));
-  g.add(new THREE.Mesh(new THREE.OctahedronGeometry(.26,0),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.35})));
-  g.add(new THREE.Mesh(new THREE.OctahedronGeometry(.52,0),new THREE.MeshBasicMaterial({color:0x89d957,wireframe:true,transparent:true,opacity:.3})));
-  var r=new THREE.Mesh(new THREE.TorusGeometry(.78,.025,8,40),new THREE.MeshBasicMaterial({color:0x1f2adf}));r.name='ring';g.add(r);
-  var r2=new THREE.Mesh(new THREE.TorusGeometry(.6,.015,8,40),new THREE.MeshBasicMaterial({color:0x89d957}));r2.name='ring2';r2.rotation.x=Math.PI/2;g.add(r2);
-}
-function buildRobot(g) {
-  var mat=function(c,e){return new THREE.MeshPhongMaterial({color:c,emissive:e||0x001100,specular:0x88ffaa,shininess:80});};
-  var body=new THREE.Mesh(new THREE.BoxGeometry(.5,.6,.35),mat(0x1f2adf,0x00020f));body.position.y=.1;g.add(body);
-  var stripe=new THREE.Mesh(new THREE.BoxGeometry(.5,.08,.36),new THREE.MeshBasicMaterial({color:0x00b7ff}));stripe.position.set(0,.15,0);g.add(stripe);
-  var head=new THREE.Mesh(new THREE.BoxGeometry(.38,.35,.3),mat(0x2233ee));head.position.y=.61;head.name='head';g.add(head);
-  [-0.1,0.1].forEach(function(x){var e=new THREE.Mesh(new THREE.SphereGeometry(.065,8,8),new THREE.MeshBasicMaterial({color:0x89d957}));e.position.set(x,.63,.16);g.add(e);});
-  [-0.35,0.35].forEach(function(x){var a=new THREE.Mesh(new THREE.BoxGeometry(.13,.44,.15),mat(0x2840ff));a.position.set(x,.06,0);a.name='arm_'+(x<0?'l':'r');g.add(a);});
-  [-0.13,0.13].forEach(function(x){var l=new THREE.Mesh(new THREE.BoxGeometry(.18,.32,.18),mat(0x1a22bb));l.position.set(x,-.29,0);g.add(l);});
-  var ball=new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),new THREE.MeshBasicMaterial({color:0x89d957}));ball.position.set(0,1.01,0);ball.name='antball';g.add(ball);
-}
-function buildPortal(g) {
-  g.add(new THREE.Mesh(new THREE.TorusGeometry(.68,.07,16,60),new THREE.MeshPhongMaterial({color:0x00b7ff,emissive:0x001833,specular:0xffffff,shininess:150})));
-  g.add(new THREE.Mesh(new THREE.TorusGeometry(.52,.03,12,50),new THREE.MeshBasicMaterial({color:0x89d957})));
-  g.add(new THREE.Mesh(new THREE.CircleGeometry(.65,64),new THREE.MeshBasicMaterial({color:0x030820,transparent:true,opacity:.9,side:THREE.DoubleSide})));
-  for(var i=0;i<14;i++){var a=(i/14)*Math.PI*2;var d=new THREE.Mesh(new THREE.SphereGeometry(.045,6,6),new THREE.MeshBasicMaterial({color:i%3===0?0x89d957:i%3===1?0x00b7ff:0x1f2adf}));d.position.set(Math.cos(a)*.68,Math.sin(a)*.68,0);d.name='dot_'+i;g.add(d);}
-  for(var i=0;i<35;i++){var r=Math.random()*.58,a=Math.random()*Math.PI*2;var s=new THREE.Mesh(new THREE.SphereGeometry(.018,4,4),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:Math.random()*.8+.2}));s.position.set(Math.cos(a)*r,Math.sin(a)*r,.01);s.name='star_'+i;g.add(s);}
+function showNotSupported() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('notSupported').style.display = 'flex';
 }
 </script>
 </body>
