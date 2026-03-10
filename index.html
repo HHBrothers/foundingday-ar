@@ -24,23 +24,33 @@
   .tagline{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.4);margin-top:14px;opacity:0;animation:fadeUp .7s ease .5s forwards;}
   .btn-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:40px;opacity:0;animation:fadeUp .7s ease .7s forwards;}
   .ar-btn{padding:20px 64px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);display:inline-block;text-align:center;text-decoration:none;}
-  .ar-btn:hover{background:var(--cyan);color:var(--dark);box-shadow:0 0 40px var(--cyan);}
+  .ar-btn:hover,.ar-btn:active{background:var(--cyan);color:var(--dark);box-shadow:0 0 40px var(--cyan);}
   .device-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.22);text-align:center;}
-  .disclaimer{position:absolute;bottom:24px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;text-align:center;padding:0 20px;line-height:1.8;opacity:0;animation:fadeUp .7s ease .9s forwards;}
+  .disclaimer{position:absolute;bottom:24px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;text-align:center;padding:0 20px;line-height:1.8;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
 <div id="landing">
   <div class="grid-bg"></div>
-  <div class="orb orb1"></div><div class="orb orb2"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
   <div class="logo-wrap">
     <div class="logo-azm">AZM</div>
     <div class="logo-ar-tag">AR</div>
     <div class="logo-sub">AUGMENTED REALITY</div>
   </div>
+
   <div class="tagline">point at a surface · press place</div>
-  <div class="btn-row" id="btnRow"></div>
+
+  <div class="btn-row">
+    <!-- iOS button (hidden by default) -->
+    <span class="device-label" id="deviceLabel">Detecting device...</span>
+    <a class="ar-btn" id="arBtn" href="#">Launch AR</a>
+  </div>
+
   <div class="disclaimer" id="disclaimer"></div>
 </div>
 
@@ -49,37 +59,35 @@ var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 var isAndroid = /Android/.test(navigator.userAgent);
 var BASE_URL = 'https://hhbrothers.github.io/foundingday-ar';
 
-var btnRow = document.getElementById('btnRow');
+var btn = document.getElementById('arBtn');
+var label = document.getElementById('deviceLabel');
 var disclaimer = document.getElementById('disclaimer');
 
 if (isIOS) {
-  // iOS: AR Quick Look — native Apple AR, no install needed
-  btnRow.innerHTML =
-    '<span class="device-label">iOS · Safari AR Quick Look</span>' +
-    '<a class="ar-btn" href="base_basic_shaded.usdz" rel="ar">Launch AR</a>';
+  label.textContent = 'iOS · Safari AR Quick Look';
+  btn.setAttribute('href', 'base_basic_shaded.usdz');
+  btn.setAttribute('rel', 'ar');
   disclaimer.textContent = 'Opens natively in iOS AR · no app needed';
 
 } else if (isAndroid) {
-  // Android: Google Scene Viewer — built into Android, no install needed
-  var sceneViewerIntent =
-    'intent://arvr.google.com/scene-viewer/1.0' +
-    '?file=' + BASE_URL + '/base_basic_shaded.glb' +
-    '&mode=ar_preferred' +
-    '&title=AZM' +
-    '#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;' +
-    'S.browser_fallback_url=' + BASE_URL + ';end;';
-
-  btnRow.innerHTML =
-    '<span class="device-label">Android · Google AR</span>' +
-    '<a class="ar-btn" id="androidBtn" href="' + sceneViewerIntent + '">Launch AR</a>';
+  label.textContent = 'Android · Google AR';
   disclaimer.textContent = 'Opens in Google AR · no install needed';
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var url = 'intent://arvr.google.com/scene-viewer/1.0'
+      + '?file=' + encodeURIComponent(BASE_URL + '/base_basic_shaded.glb')
+      + '&mode=ar_preferred'
+      + '&title=AZM'
+      + '#Intent;scheme=https;package=com.google.android.googlequicksearchbox;'
+      + 'action=android.intent.action.VIEW;'
+      + 'S.browser_fallback_url=' + encodeURIComponent(BASE_URL) + ';end;';
+    window.location.href = url;
+  });
 
 } else {
-  // Desktop
-  btnRow.innerHTML =
-    '<span class="device-label">Open on your phone for AR</span>' +
-    '<div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px;margin-top:8px;">iOS Safari · Android Chrome</div>';
-  disclaimer.textContent = 'This experience is designed for mobile';
+  label.textContent = 'Open on your phone for AR';
+  btn.style.display = 'none';
+  disclaimer.textContent = 'Best on iOS Safari or Android Chrome';
 }
 </script>
 </body>
