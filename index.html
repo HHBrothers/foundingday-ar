@@ -22,19 +22,14 @@
   .logo-ar-tag{position:absolute;top:10px;right:-38px;font-size:10px;color:var(--green);letter-spacing:2px;border:1px solid var(--green);padding:2px 7px;animation:blink 1.8s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   .tagline{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.4);margin-top:14px;opacity:0;animation:fadeUp .7s ease .5s forwards;}
-  .btn-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:44px;opacity:0;animation:fadeUp .7s ease .7s forwards;}
-  .start-btn{padding:18px 60px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);}
+  .btn-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:40px;opacity:0;animation:fadeUp .7s ease .7s forwards;}
+  .start-btn{padding:18px 60px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);display:inline-block;text-align:center;text-decoration:none;}
   .start-btn:hover{background:var(--cyan);color:var(--dark);box-shadow:0 0 40px var(--cyan);}
-  .ios-btn{padding:18px 60px;background:transparent;border:2px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);text-decoration:none;display:inline-block;text-align:center;}
+  .ios-btn{padding:18px 60px;background:transparent;border:2px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);display:inline-block;text-align:center;text-decoration:none;}
   .ios-btn:hover{background:var(--green);color:var(--dark);box-shadow:0 0 40px var(--green);}
-  .device-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.2);}
-  .disclaimer{position:absolute;bottom:24px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;text-align:center;opacity:0;animation:fadeUp .7s ease .9s forwards;}
+  .device-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.25);text-align:center;}
+  .disclaimer{position:absolute;bottom:24px;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;text-align:center;padding:0 20px;line-height:1.8;opacity:0;animation:fadeUp .7s ease .9s forwards;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
-  /* NOT SUPPORTED */
-  #notSupported{position:fixed;inset:0;background:var(--dark);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center;}
-  #notSupported h2{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--cyan);}
-  #notSupported p{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1px;line-height:1.8;max-width:320px;}
 
   /* AR OVERLAY */
   #arOverlay{position:fixed;inset:0;display:none;z-index:50;pointer-events:none;}
@@ -46,23 +41,27 @@
   .hud-corner.br{bottom:18px;right:18px;border-width:0 2px 2px 0;}
   .hud-top{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;}
   .hud-brand{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:6px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .hud-status{font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,183,255,.07);border:1px solid rgba(0,183,255,.2);padding:5px 16px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);text-transform:uppercase;}
+  .hud-status{font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,183,255,.07);border:1px solid rgba(0,183,255,.2);padding:5px 16px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);text-transform:uppercase;white-space:nowrap;}
   .scanning-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 3s linear infinite;opacity:.3;}
   @keyframes scan{0%{top:0%;opacity:0}5%{opacity:.3}95%{opacity:.3}100%{top:100%;opacity:0}}
   .reticle-hint{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.45);text-transform:uppercase;text-align:center;white-space:nowrap;}
   .place-wrap{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;}
   .place-btn{padding:18px 64px;background:var(--cyan);color:var(--dark);font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:5px;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);transition:all .2s;box-shadow:0 0 30px rgba(0,183,255,.4);}
-  .place-btn:hover{background:#fff;box-shadow:0 0 50px rgba(0,183,255,.7);}
-  .place-btn:active{transform:scale(.96);}
   .place-btn:disabled{background:rgba(0,183,255,.15);color:rgba(255,255,255,.25);box-shadow:none;cursor:not-allowed;}
   .back-btn{position:absolute;top:18px;left:18px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s;}
   .back-btn:hover{border-color:var(--cyan);color:var(--cyan);}
   .placed-badge{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.4);}
+
+  /* ERROR MODAL */
+  #errorModal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:400;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center;backdrop-filter:blur(10px);}
+  #errorModal h2{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--cyan);}
+  #errorModal .err-msg{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:1px;line-height:2;max-width:340px;}
+  #errorModal .err-detail{font-size:10px;color:rgba(255,255,255,.25);margin-top:4px;max-width:340px;line-height:1.8;}
+  #errorModal .err-back{padding:14px 40px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:3px;cursor:pointer;margin-top:8px;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);}
 </style>
 </head>
 <body>
 
-<!-- LANDING -->
 <div id="landing">
   <div class="grid-bg"></div>
   <div class="orb orb1"></div><div class="orb orb2"></div>
@@ -72,20 +71,10 @@
     <div class="logo-sub">AUGMENTED REALITY</div>
   </div>
   <div class="tagline">point at a surface · press place</div>
-  <div class="btn-row" id="btnRow">
-    <!-- Buttons injected by JS based on device -->
-  </div>
-  <div class="disclaimer">Android: Chrome · iOS: Safari 16+</div>
+  <div class="btn-row" id="btnRow"></div>
+  <div class="disclaimer" id="disclaimer"></div>
 </div>
 
-<!-- NOT SUPPORTED -->
-<div id="notSupported">
-  <h2>Not Supported</h2>
-  <p>Please use Chrome on Android or Safari on iOS 16+.</p>
-  <button class="start-btn" style="margin-top:24px;" id="nsBackBtn">Go Back</button>
-</div>
-
-<!-- AR OVERLAY (Android WebXR) -->
 <div id="arOverlay">
   <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
   <div class="hud-corner bl"></div><div class="hud-corner br"></div>
@@ -102,56 +91,70 @@
   </div>
 </div>
 
+<div id="errorModal">
+  <h2>AR Unavailable</h2>
+  <div class="err-msg" id="errMsg"></div>
+  <div class="err-detail" id="errDetail"></div>
+  <button class="err-back" onclick="closeError()">← BACK</button>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-
 <script>
 var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 var isAndroid = /Android/.test(navigator.userAgent);
+var hasXR = !!navigator.xr;
 
-// Build landing buttons based on device
 var btnRow = document.getElementById('btnRow');
+var disclaimer = document.getElementById('disclaimer');
+
 if (isIOS) {
-  // iOS: AR Quick Look via <a rel="ar">
+  // iOS: use AR Quick Look
   btnRow.innerHTML =
-    '<span class="device-label">iOS · Safari AR</span>' +
-    '<a class="ios-btn" id="iosArBtn" href="base_basic_shaded.usdz" rel="ar">' +
-    '  Launch AR' +
-    '</a>';
+    '<span class="device-label">iOS · tap to open in AR</span>' +
+    '<a class="ios-btn" href="base_basic_shaded.usdz" rel="ar">🔺 Launch AR</a>';
+  disclaimer.textContent = 'Opens Apple AR Quick Look · iOS 13+ Safari';
+} else if (isAndroid) {
+  // Android: try WebXR, fall back to Scene Viewer (Google AR)
+  btnRow.innerHTML =
+    '<span class="device-label">Android · Chrome AR</span>' +
+    '<button class="start-btn" id="startBtn">🔷 Launch AR</button>' +
+    '<a class="ios-btn" id="sceneViewerBtn" href="#" style="font-size:11px;padding:12px 40px;">or open in Google AR</a>';
+  disclaimer.textContent = 'Requires ARCore · Android 7+ · Chrome';
+
+  // Scene Viewer (Google AR) deep link - works on any Android without WebXR
+  var sceneViewerUrl = 'intent://arvr.google.com/scene-viewer/1.0?file=https://hhbrothers.github.io/foundingday-ar/base_basic_shaded.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://hhbrothers.github.io/foundingday-ar;end;';
+  document.addEventListener('DOMContentLoaded', function() {
+    var svBtn = document.getElementById('sceneViewerBtn');
+    if (svBtn) svBtn.href = sceneViewerUrl;
+    var sb = document.getElementById('startBtn');
+    if (sb) sb.addEventListener('click', startAR);
+  });
 } else {
-  // Android / other: WebXR
+  // Desktop or unknown
   btnRow.innerHTML =
-    '<span class="device-label">' + (isAndroid ? 'Android · Chrome AR' : 'WebXR AR') + '</span>' +
+    '<span class="device-label">Open on your phone for AR</span>' +
     '<button class="start-btn" id="startBtn">Launch AR</button>';
+  disclaimer.textContent = 'Best on Android Chrome or iOS Safari';
   document.addEventListener('DOMContentLoaded', function() {
     var sb = document.getElementById('startBtn');
     if (sb) sb.addEventListener('click', startAR);
   });
 }
 
-// Also wire up immediately in case DOM is ready
-window.addEventListener('load', function() {
-  var sb = document.getElementById('startBtn');
-  if (sb) sb.addEventListener('click', startAR);
-});
-
-document.getElementById('nsBackBtn').addEventListener('click', function() {
-  document.getElementById('notSupported').style.display = 'none';
-  document.getElementById('landing').style.display = 'flex';
-});
 document.getElementById('backBtn').addEventListener('click', endAR);
 document.getElementById('placeBtn').addEventListener('click', placeModel);
 
-/* ── WebXR (Android) ── */
+/* ── WebXR ── */
 var renderer, scene, camera3d, reticle;
 var hitTestSource = null, hitTestSourceRequested = false;
 var loadedModel = null, placedCount = 0, xrSession = null;
 var clock, placedObjects = [], surfaceFound = false;
 
-// Pre-load GLB for Android
 if (!isIOS) {
-  var loader = new THREE.GLTFLoader();
-  loader.load('base_basic_shaded.glb', function(gltf) {
+  var gltfLoader = new THREE.GLTFLoader();
+  gltfLoader.load('base_basic_shaded.glb', function(gltf) {
     loadedModel = gltf.scene;
     var box = new THREE.Box3().setFromObject(loadedModel);
     var size = new THREE.Vector3(); box.getSize(size);
@@ -161,12 +164,20 @@ if (!isIOS) {
 }
 
 function startAR() {
-  if (!navigator.xr) { showNotSupported(); return; }
+  if (!navigator.xr) {
+    showError('WebXR Not Found', 'Your browser does not support WebXR.', 'Try: Android Chrome 81+ with ARCore installed. Go to Play Store and install "Google Play Services for AR".');
+    return;
+  }
   navigator.xr.isSessionSupported('immersive-ar').then(function(supported) {
-    if (!supported) { showNotSupported(); return; }
+    if (!supported) {
+      showError('AR Not Supported', 'Your device or browser does not support immersive AR.', 'Make sure ARCore is installed from the Play Store. Try the "Google AR" button instead.');
+      return;
+    }
     document.getElementById('landing').style.display = 'none';
     launchXR();
-  }).catch(function() { showNotSupported(); });
+  }).catch(function(err) {
+    showError('AR Check Failed', 'Could not check AR support.', err.message || 'Unknown error');
+  });
 }
 
 function launchXR() {
@@ -180,7 +191,6 @@ function launchXR() {
 
   scene = new THREE.Scene();
   camera3d = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
-
   scene.add(new THREE.AmbientLight(0xffffff, 1.4));
   var d1 = new THREE.DirectionalLight(0x00b7ff, 1.5); d1.position.set(1,3,2); scene.add(d1);
   var d2 = new THREE.DirectionalLight(0x89d957, 0.8); d2.position.set(-2,1,-1); scene.add(d2);
@@ -191,7 +201,6 @@ function launchXR() {
   reticle.matrixAutoUpdate = false;
   reticle.visible = false;
   scene.add(reticle);
-
   var dGeo = new THREE.CircleGeometry(0.04, 32);
   dGeo.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
   reticle.add(new THREE.Mesh(dGeo, new THREE.MeshBasicMaterial({ color:0x89d957, transparent:true, opacity:0.7, side:THREE.DoubleSide })));
@@ -214,9 +223,8 @@ function launchXR() {
       renderer.setAnimationLoop(null);
     });
   }).catch(function(err) {
-    console.error('XR error:', err);
-    showNotSupported();
     if (renderer && renderer.domElement) renderer.domElement.remove();
+    showError('Session Failed', 'Could not start AR session.', err.message || String(err));
   });
 }
 
@@ -229,8 +237,8 @@ function onXRFrame(timestamp, frame) {
   var refSpace = renderer.xr.getReferenceSpace();
 
   if (!hitTestSourceRequested) {
-    session.requestReferenceSpace('viewer').then(function(viewerSpace) {
-      session.requestHitTestSource({ space: viewerSpace }).then(function(src) { hitTestSource = src; });
+    session.requestReferenceSpace('viewer').then(function(vs) {
+      session.requestHitTestSource({ space: vs }).then(function(src) { hitTestSource = src; });
     });
     hitTestSourceRequested = true;
   }
@@ -263,11 +271,8 @@ function placeModel() {
   var clone = loadedModel.clone();
   var pos = new THREE.Vector3(), quat = new THREE.Quaternion(), sc = new THREE.Vector3();
   reticle.matrix.decompose(pos, quat, sc);
-  clone.position.copy(pos);
-  clone.quaternion.copy(quat);
-  scene.add(clone);
-  placedObjects.push(clone);
-  placedCount++;
+  clone.position.copy(pos); clone.quaternion.copy(quat);
+  scene.add(clone); placedObjects.push(clone); placedCount++;
   document.getElementById('placedBadge').textContent = placedCount + ' placed';
   var btn = document.getElementById('placeBtn');
   btn.textContent = 'PLACED ✦'; btn.style.background = 'var(--green)'; btn.style.color = '#000';
@@ -287,11 +292,20 @@ function endAR() {
   document.getElementById('reticleHint').textContent = 'Searching for surface...';
 }
 
-function setStatus(t) { document.getElementById('statusText').textContent = t; }
-function showNotSupported() {
+function showError(title, msg, detail) {
   document.getElementById('landing').style.display = 'none';
-  document.getElementById('notSupported').style.display = 'flex';
+  document.getElementById('errMsg').textContent = msg;
+  document.getElementById('errDetail').textContent = detail || '';
+  document.querySelector('#errorModal h2').textContent = title;
+  document.getElementById('errorModal').style.display = 'flex';
 }
+
+function closeError() {
+  document.getElementById('errorModal').style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+}
+
+function setStatus(t) { document.getElementById('statusText').textContent = t; }
 </script>
 </body>
 </html>
